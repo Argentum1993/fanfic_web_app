@@ -1,11 +1,23 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import {Button, Form, FormControl, Nav, Navbar, NavDropdown} from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap'
 
 import logo from '../logo.png'
 import {Link} from "react-router-dom";
+import AuthService from '../service/auth.service'
 
 const Navigation= (props) => {
+    const [user, setUser] = useState(AuthService.getCurrentUser())
+
+    const logout = () => {
+        AuthService.logout()
+        setUser(null)
+    }
+
+    const debug = () => {
+        alert(JSON.stringify(user, null ,2))
+    }
+
     return (
         <Navbar bg='light' expand='lg'>
             <LinkContainer to='/'>
@@ -30,12 +42,18 @@ const Navigation= (props) => {
                     <FormControl type='text' placeholder='Search' className='mr-sm-2' />
                     <Button variant='outline-success'>Search</Button>
                 </Form>
-                <LinkContainer to='/login'>
-                    <Nav.Link>Login</Nav.Link>
-                </LinkContainer>
-                <LinkContainer to='/sign-up'>
-                    <Nav.Link>Sign up</Nav.Link>
-                </LinkContainer>
+                { !user ?
+                    <>
+                        <LinkContainer to='/login'>
+                            <Nav.Link>Login</Nav.Link>
+                        </LinkContainer>
+                        <LinkContainer to='/sign-up'>
+                            <Nav.Link>Sign up</Nav.Link>
+                        </LinkContainer>
+                    </>
+                    :
+                    <Button className="shadow-none" variant="link" onClick={logout}>Logout</Button>
+                }
             </Navbar.Collapse>
         </Navbar>
     )

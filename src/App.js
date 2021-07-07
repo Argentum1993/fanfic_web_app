@@ -6,17 +6,20 @@ import {Switch, Route} from "react-router-dom";
 import Login from "./componets/Login";
 import Registration from "./componets/Registration";
 
+import Start from "./componets/onboarding/Start";
+
 
 
 function App() {
   return (
-      <>
-        <Navigation/>
-        <Switch>
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/sign-up" component={Registration} />
-        </Switch>
-      </>
+      <div className="App">
+          <Switch>
+              <Route exact path="/sign-up" component={Registration} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/start" component={Start}/>
+              <Route component={Navigation}/>
+          </Switch>
+      </div>
   );
 }
 
