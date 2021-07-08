@@ -49,9 +49,9 @@ const TagsBar = (props) => {
             alignContent="left"
             textAlign="left"
         >
-            {tags && tags.map(tag => {
+            {tags && tags.map((tag, i) => {
                 return(
-                    <Chip className={classes.tag} label={tag.name}/>
+                    <Chip className={classes.tag} key={tag.name + i} label={tag.name}/>
                 )
             })}
         </Box>

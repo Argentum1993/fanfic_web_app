@@ -42,7 +42,7 @@ const HeaderFanfic = (props) => {
                     title={props.fanfic.title}
                 />
             </Grid>
-            <Grid className={classes.info}  conteiner>
+            <Grid className={classes.info}  >
                 <Box
                     className={classes.infoTitle}
                     alignContent="left"

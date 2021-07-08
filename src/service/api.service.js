@@ -13,6 +13,7 @@ const FANFIC_RATING_ENDPOINT = FANFIC_ENDPOINT + '/rating'
 // Formats map endpoints
 const USER_FANDOMS_ENDPOINT_FORMAT = API_URL + 'users/{0}/fandoms'
 const CHAPTER_NAMES_ENDPOINT_FORMAT = FANFIC_ENDPOINT + '/{0}/chapters/name'
+const FANFIC_CHAPTER_ENDPOINT_FORMAT = FANFIC_ENDPOINT + '/{0}/chapters/{1}'
 
 class ApiService{
 
@@ -50,6 +51,13 @@ class ApiService{
 
     getNameChapters = (idFanfic) => {
         return axios.get(CHAPTER_NAMES_ENDPOINT_FORMAT.format(idFanfic), { headers: authHeader() })
+    }
+
+    getChapter = (idFanfic, chapterNum = 1) => {
+        return axios.get(
+            FANFIC_CHAPTER_ENDPOINT_FORMAT.format(idFanfic, chapterNum),
+            { headers: authHeader() }
+        )
     }
 }
 

@@ -137,7 +137,7 @@ const FanficDialog = (props) => {
                                 {props.fanfic.title}
                             </Typography>
                             {console.log(props.fanfic.rating)}
-                            <Grid container="div" direction="row" alignItems="center" >
+                            <Grid container direction="row" alignItems="center" >
                                 <Rating
                                     name="customized-icons"
                                     value={props.fanfic.rating}

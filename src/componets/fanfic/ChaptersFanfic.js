@@ -1,15 +1,10 @@
 import React from 'react';
 import {Paper, Table, TableBody, TableCell, TableContainer, TableRow} from "@material-ui/core";
 import Box from "@material-ui/core/Box";
-import { DataGrid } from '@material-ui/data-grid';
 
-/*
-<Paper className={className}>
-            {chapters && chapters.map(chapter => <Box textAlign="left"> { chapter } </Box>)}
-        </Paper>
- */
 
-const ChaptersFanfic = ({chapters, className}) => {
+
+const ChaptersFanfic = ({chapters, className, clickHandler}) => {
     return (
         <Box display="flex" justifyContent="center">
             <TableContainer className={className} component={Paper}>
@@ -20,7 +15,12 @@ const ChaptersFanfic = ({chapters, className}) => {
                             (name, i) => {
                                 return(
                                     <TableRow hover key={name} >
-                                        <TableCell  align="left" onClick={() => {alert(i)}}>{(i + 1) + ") " + name}</TableCell>
+                                        <TableCell
+                                            align="left"
+                                            onClick={ () => { clickHandler(i) } }
+                                        >
+                                            {(i + 1) + ") " + name}
+                                        </TableCell>
                                     </TableRow>)
                             })
                         }

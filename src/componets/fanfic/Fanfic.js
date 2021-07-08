@@ -1,13 +1,8 @@
 import React, {useEffect, useState} from 'react'
-import { useLocation } from "react-router-dom"
+import {useHistory, useLocation} from "react-router-dom"
 import { Redirect } from 'react-router-dom'
 import Container from "@material-ui/core/Container";
-import {CardMedia, Chip} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
-import Box from "@material-ui/core/Box";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
 import HeaderFanfic from "./HeaderFanfic";
 import DescriptionFanfic from "./DescriptionFanfic";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -26,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
 const FanficBody = (props) => {
     const classes = useStyles()
     const [chapters, setChapters] = useState()
+    const history = useHistory()
 
     useEffect(() => {
         ApiService.getNameChapters(props.fanfic.id).then(r => {
@@ -33,12 +29,21 @@ const FanficBody = (props) => {
         })
     }, [])
 
+    const onChapter = (chapterNum) => {
+        history.push('/chapter', {chapterNum: chapterNum, fanficId: props.fanfic.id})
+    }
+
     return(
         <Container>
             <CssBaseline />
             <HeaderFanfic fanfic={props.fanfic}/>
             <DescriptionFanfic fanfic={props.fanfic}/>
-            {chapters && <ChaptersFanfic className={classes.chaptersFanfic} chapters={chapters}/>}
+            {chapters &&
+            <ChaptersFanfic
+                className={classes.chaptersFanfic}
+                chapters={chapters}
+                clickHandler={onChapter}
+            />}
         </Container>
     )
 }

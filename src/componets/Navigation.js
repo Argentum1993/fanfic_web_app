@@ -8,6 +8,7 @@ import AuthService from '../service/auth.service'
 import Registration from "./Registration";
 import Home from "./home/Home";
 import Fanfic from "./fanfic/Fanfic";
+import Chapter from "./chapter/Chapter";
 
 const Navigation= (props) => {
     const [user, setUser] = useState(AuthService.getCurrentUser())
@@ -63,6 +64,7 @@ const Navigation= (props) => {
             <Switch>
                 <Route exact path="/" component={Home} />
                 <Route exact path="/fanfic" component={Fanfic} />
+                <Route exact path="/chapter" component={Chapter} />
             </Switch>
         </>
     )
