@@ -5,6 +5,23 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
 
+/*
+**  String formatting
+**  example: "{0} wants my cute {1} this time? Deadpool {1}{2}".format("Why", "buns")
+**  output: "Who wants my cute buns this time? Deadpool buns"
+*/
+if (!String.prototype.format) {
+    String.prototype.format = function() {
+        const args = arguments;
+        return this.replace(/{(\d+)}/g, function(match, number) {
+            return typeof args[number] != 'undefined'
+                ? args[number]
+                : match
+                ;
+        });
+    };
+}
+
 ReactDOM.render(
       <BrowserRouter>
           <App />
