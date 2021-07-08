@@ -115,6 +115,10 @@ const FanficDialog = (props) => {
         history.push('/fanfic', { fanfic: props.fanfic })
     }
 
+    const onRead = () => {
+        history.push('/chapter', { fanficId: props.fanfic.id, chapterNum: 1 })
+    }
+
     return (
         <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={props.open}>
             {props.fanfic &&
@@ -155,7 +159,12 @@ const FanficDialog = (props) => {
                                 display="flex"
                                 justifyContent="center"
                                 justifyItems="center">
-                            <Button className={classes.readButton}  variant="contained" color="secondary">
+                            <Button
+                                className={classes.readButton}
+                                variant="contained"
+                                color="secondary"
+                                onClick={onRead}
+                            >
                                 Read
                             </Button>
                             </Box>

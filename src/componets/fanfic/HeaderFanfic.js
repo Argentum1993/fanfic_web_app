@@ -4,6 +4,7 @@ import {CardMedia, Chip} from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import {makeStyles} from "@material-ui/core/styles";
+import {useHistory} from "react-router-dom";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -30,6 +31,11 @@ const useStyles = makeStyles((theme) => ({
 
 const HeaderFanfic = (props) => {
     const classes = useStyles()
+    const history = useHistory()
+
+    const onRead = () => {
+        history.push('/chapter', { fanficId: props.fanfic.id, chapterNum: 1 })
+    }
 
     return (
         <Grid className={classes.container} container justify="center">
@@ -63,7 +69,7 @@ const HeaderFanfic = (props) => {
                     display="flex"
                     alignContent="center"
                 >
-                    <Button  variant="contained" color="secondary">
+                    <Button  variant="contained" color="secondary" onClick={onRead}>
                         Read
                     </Button>
                 </Box>

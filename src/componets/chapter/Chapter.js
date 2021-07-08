@@ -57,8 +57,20 @@ const ChapterBody = ({chapterNum, fanficId}) => {
         <>
             {chapter ?
                 <Container>
-                    <Grid className={classes.container} container justify="center">
+                    <Grid
+                        className={classes.container}
+                        container
+                        alignContent="center"
+                        justify="center"
+                        direction="column"
+                    >
                         <Grid item>
+                            <Box
+                                display="flex"
+                                alignContent="center"
+                                alignItems="center"
+                                flexDirection="column"
+                            >
                             <Typography align="center" variant="h3"  gutterBottom>
                                 {chapter.name}
                             </Typography>
@@ -71,6 +83,7 @@ const ChapterBody = ({chapterNum, fanficId}) => {
                                 title={chapter.name}
                             />
                             }
+                            </Box>
                         </Grid>
                         <Grid item>
                             <Box borderTop={1}>
