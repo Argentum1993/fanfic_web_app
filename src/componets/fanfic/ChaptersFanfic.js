@@ -17,7 +17,7 @@ const ChaptersFanfic = ({chapters, className, clickHandler}) => {
                                     <TableRow hover key={name} >
                                         <TableCell
                                             align="left"
-                                            onClick={ () => { clickHandler(i) } }
+                                            onClick={ () => { clickHandler(i + 1) } }
                                         >
                                             {(i + 1) + ") " + name}
                                         </TableCell>

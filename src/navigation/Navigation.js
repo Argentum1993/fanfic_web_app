@@ -5,10 +5,11 @@ import { LinkContainer } from 'react-router-bootstrap'
 import logo from '../logo.png'
 import {Link, Route, Switch} from "react-router-dom";
 import AuthService from '../service/auth.service'
-import Registration from "./Registration";
-import Home from "./home/Home";
-import Fanfic from "./fanfic/Fanfic";
-import Chapter from "./chapter/Chapter";
+import Registration from "../componets/Registration";
+import Home from "../componets/home/Home";
+import Fanfic from "../componets/fanfic/Fanfic";
+import Chapter from "../componets/chapter/Chapter";
+import UserMenu from "./UserMenu";
 
 const Navigation= (props) => {
     const [user, setUser] = useState(AuthService.getCurrentUser())
@@ -43,10 +44,6 @@ const Navigation= (props) => {
                             </LinkContainer>
                         </NavDropdown>
                     </Nav>
-                    <Form inline>
-                        <FormControl type='text' placeholder='Search' className='mr-sm-2' />
-                        <Button variant='outline-success'>Search</Button>
-                    </Form>
                     { !user ?
                         <>
                             <LinkContainer to='/login'>
@@ -57,7 +54,7 @@ const Navigation= (props) => {
                             </LinkContainer>
                         </>
                         :
-                        <Button className="shadow-none" variant="link" onClick={logout}>Logout</Button>
+                        <UserMenu logoutHandler={logout}/>
                     }
                 </Navbar.Collapse>
             </Navbar>

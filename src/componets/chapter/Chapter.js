@@ -38,10 +38,13 @@ const ChapterBody = ({chapterNum, fanficId}) => {
     useEffect(() => {
         ApiService.getChapter(fanficId, chapterNum = chapterNum)
             .then(r => {
-                const str = r.data.replace(/\n/g, "\\n").replace(/\r/g, "\\r").replace(/\t/g, "\\t")
-
                 //TODO del сrutch
-                setChapter(JSON.parse(str))
+                if (typeof r.data === 'object'){
+                    setChapter(r.data)
+                } else {
+                    const str = r.data.replace(/\n/g, "\\n").replace(/\r/g, "\\r").replace(/\t/g, "\\t")
+                    setChapter(JSON.parse(str))
+                }
             })
     }, [chapterNum, fanficId])
 

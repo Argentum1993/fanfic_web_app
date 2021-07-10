@@ -30,9 +30,11 @@ class AuthService {
         })
     }
 
-    logout() {
-        localStorage.removeItem(USER);
-        console.log("test");
+    logout(_history = null, redirect = '/') {
+        localStorage.removeItem(USER)
+        if (_history != null) {
+            _history.push(redirect)
+        }
     }
 
     getCurrentUser() {
