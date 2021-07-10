@@ -5,12 +5,12 @@ const USER = 'user'
 
 class AuthService {
 
-    register = (first_name, last_name, email, password) => {
-        const REG_ENDPOINT = API_URL + '/sign-up'
+    register = (firstName, lastName, email, password) => {
+        const REG_ENDPOINT = API_URL + '/sign_up'
 
         return axios.post(REG_ENDPOINT, {
-            first_name,
-            last_name,
+            firstName,
+            lastName,
             email,
             password
         })

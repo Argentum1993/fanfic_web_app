@@ -59,7 +59,10 @@ const Start = () => {
     const history = useHistory()
 
     useEffect(() => {
-        ApiService.getFandoms().then( fandoms => setFandoms(fandoms.data) )
+        ApiService.getFandoms()
+            .then( fandoms => setFandoms(fandoms.data) )
+            //TODO handle error
+            .catch((e) => history.push('/'))
     },[])
 
     const addFavorite = (idFavorite) => {
