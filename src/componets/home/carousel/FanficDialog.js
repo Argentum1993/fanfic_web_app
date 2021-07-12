@@ -25,6 +25,7 @@ import {Rating} from "@material-ui/lab";
 import PropTypes from "prop-types";
 import Box from "@material-ui/core/Box";
 import {useHistory} from "react-router-dom";
+import FanficRating from "../../FanficRating/FanficRating";
 
 const useStyles = makeStyles((theme) => ({
     closeButton: {
@@ -69,37 +70,6 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const customIcons = {
-    1: {
-        icon: <SentimentVeryDissatisfiedIcon />,
-        label: 'Very Dissatisfied',
-    },
-    2: {
-        icon: <SentimentDissatisfiedIcon />,
-        label: 'Dissatisfied',
-    },
-    3: {
-        icon: <SentimentSatisfiedIcon />,
-        label: 'Neutral',
-    },
-    4: {
-        icon: <SentimentSatisfiedAltIcon />,
-        label: 'Satisfied',
-    },
-    5: {
-        icon: <SentimentVerySatisfiedIcon />,
-        label: 'Very Satisfied',
-    },
-};
-
-function IconContainer(props) {
-    const { value, ...other } = props;
-    return <span {...other}>{customIcons[value].icon}</span>;
-}
-
-IconContainer.propTypes = {
-    value: PropTypes.number.isRequired,
-};
 
 const FanficDialog = (props) => {
     const classes = useStyles()
@@ -140,15 +110,8 @@ const FanficDialog = (props) => {
                             <Typography className={classes.titleFanfic} noWrap={true} variant="h5">
                                 {props.fanfic.title}
                             </Typography>
-                            {console.log(props.fanfic.rating)}
                             <Grid container direction="row" alignItems="center" >
-                                <Rating
-                                    name="customized-icons"
-                                    value={props.fanfic.rating}
-                                    getLabelText={(value) => value > 0 ? customIcons[value].label : "" }
-                                    IconContainerComponent={IconContainer}
-                                    readOnly
-                                />
+                                <FanficRating rating={props.fanfic.rating} />
                                 <Chip
                                     className={classes.fandomFanfic}
                                     label={props.fanfic.fandom.name}

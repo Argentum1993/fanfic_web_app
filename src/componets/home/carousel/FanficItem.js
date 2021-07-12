@@ -21,10 +21,10 @@ const FanficItem = (props) => {
             <CardActionArea onClick={clickHandler}>
                 <CardMedia
                     component="img"
-                    alt="Contemplative Reptile"
+                    alt= {props.fanfic.title + "-img"}
                     height="280"
                     image={props.fanfic.img}
-                    title="Contemplative Reptile"
+                    title={props.fanfic.title}
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">

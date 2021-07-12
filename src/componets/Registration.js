@@ -169,9 +169,6 @@ const Registration = () => {
     }
 
     const handleSignUp = (values) => {
-        console.log(values)
-        console.log("Hello!");
-        alert(JSON.stringify(values, null, 2));
         AuthService.register(values.firstName, values.lastName, values.email, values.password)
             .then(function (response){
                 AuthService.login(values.email, values.password)
@@ -179,10 +176,6 @@ const Registration = () => {
                     .catch(e => alert("Can't auth"))
             }).catch(function (error){
             console.log(error)
-            alert(JSON.stringify(error, null, 2));
-            alert(JSON.stringify(error.response, null, 2));
-        }).then(function (){
-            console.log("is ok always");
         })
     }
 

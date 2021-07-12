@@ -5,7 +5,6 @@ import Grid from '@material-ui/core/Grid';
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Box from "@material-ui/core/Box";
-import {Favorite, FavoriteBorder} from "@material-ui/icons";
 import CheckBoxPaper from "./CheckBoxPaper";
 
 import ApiService from '../../service/api.service'

@@ -94,10 +94,6 @@ const LoginForm = ({ handleSubmit, values }) => {
                         id="password"
                         autoComplete="current-password"
                     />
-                    <FormControlLabel
-                        control={<Checkbox value="remember" color="primary" />}
-                        label="Remember me"
-                    />
                     <Button
                         type="submit"
                         fullWidth
@@ -108,11 +104,6 @@ const LoginForm = ({ handleSubmit, values }) => {
                         Sign In
                     </Button>
                     <Grid container>
-                        <Grid item xs>
-                            <Link component={RouterLink} to="#" variant="body2">
-                                Forgot password?
-                            </Link>
-                        </Grid>
                         <Grid item>
                             <Link component={RouterLink} to="/sign-up" variant="body2">
                                 {"Don't have an account? Sign Up"}
@@ -142,6 +133,7 @@ const Login = () => {
         AuthService.login(values.email, values.password).then(response => {
             history.push('/')
         })
+            .catch(e => alert("Invalid username or password"))
     }
 
     return (

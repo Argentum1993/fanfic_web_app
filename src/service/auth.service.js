@@ -1,4 +1,5 @@
 import axios from 'axios'
+import _, { map } from 'underscore'
 
 const API_URL = '/api/v1/auth'
 const USER = 'user'
@@ -30,15 +31,20 @@ class AuthService {
         })
     }
 
-    logout(_history = null, redirect = '/') {
+    logout(history = null, redirect = '/') {
         localStorage.removeItem(USER)
-        if (_history != null) {
-            _history.push(redirect)
+        if (history != null) {
+            history.push(redirect)
         }
     }
 
     getCurrentUser() {
         return JSON.parse(localStorage.getItem(USER))
+    }
+
+    updateUser(updates) {
+        const user = this.getCurrentUser()
+        localStorage.setItem(USER, JSON.stringify(_.extend(user, updates)))
     }
 }
 

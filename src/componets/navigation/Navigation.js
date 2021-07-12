@@ -2,25 +2,36 @@ import React, {useEffect, useState} from 'react'
 import {Button, Form, FormControl, Nav, Navbar, NavDropdown} from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap'
 
-import logo from '../logo.png'
-import {Link, Route, Switch} from "react-router-dom";
-import AuthService from '../service/auth.service'
-import Registration from "../componets/Registration";
-import Home from "../componets/home/Home";
-import Fanfic from "../componets/fanfic/Fanfic";
-import Chapter from "../componets/chapter/Chapter";
+import logo from '../../logo.png'
+import {Link, Route, Switch, useHistory} from "react-router-dom";
+import Registration from "../Registration";
+import Home from "../home/Home";
+import Fanfic from "../fanfic/Fanfic";
+import Chapter from "../chapter/Chapter";
 import UserMenu from "./UserMenu";
+import Profile from "../profile/Profile";
+import AuthService from '../../service/auth.service'
+import ApiService from '../../service/api.service'
+import {CircularProgress} from "@material-ui/core";
+import SearchResults from "../search_results/SearchResults";
 
 const Navigation= (props) => {
     const [user, setUser] = useState(AuthService.getCurrentUser())
+    const [fandoms, setFandoms] = useState(null)
+    const history = useHistory()
+
+    useEffect(() => {
+        ApiService.getFandoms()
+            .then(r => setFandoms(r.data))
+    }, [])
 
     const logout = () => {
         AuthService.logout()
         setUser(null)
     }
 
-    const debug = () => {
-        alert(JSON.stringify(user, null ,2))
+    const onFandom = (fandom) => {
+        history.push('/results', { fandom: fandom })
     }
 
     return (
@@ -33,15 +44,15 @@ const Navigation= (props) => {
                 <Navbar.Collapse id='basic-navbar-nav'>
                     <Nav className='mr-auto'>
                         <NavDropdown title='Fandoms' id='basic-nav-dropdown'>
-                            <LinkContainer to='/test'>
-                                <NavDropdown.Item>Fandom 1</NavDropdown.Item>
-                            </LinkContainer>
-                            <LinkContainer to='/test1'>
-                                <NavDropdown.Item >Fandom 2</NavDropdown.Item>
-                            </LinkContainer>
-                            <LinkContainer to='/test2'>
-                                <NavDropdown.Item>Fandom 3</NavDropdown.Item>
-                            </LinkContainer>
+                            {fandoms ?
+                                fandoms.map((fandom) => {
+                                    return(
+                                        <NavDropdown.Item onClick={()=> onFandom(fandom)}>{fandom.name}</NavDropdown.Item>
+                                    )}
+                                )
+                                :
+                                <CircularProgress />
+                            }
                         </NavDropdown>
                     </Nav>
                     { !user ?
@@ -62,6 +73,8 @@ const Navigation= (props) => {
                 <Route exact path="/" component={Home} />
                 <Route exact path="/fanfic" component={Fanfic} />
                 <Route exact path="/chapter" component={Chapter} />
+                <Route exact path="/profile" component={Profile} />
+                <Route exact path="/results" component={SearchResults} />
             </Switch>
         </>
     )

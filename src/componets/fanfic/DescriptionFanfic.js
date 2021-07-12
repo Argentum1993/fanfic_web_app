@@ -7,6 +7,7 @@ import { deepOrange } from '@material-ui/core/colors'
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import ChaptersFanfic from "./ChaptersFanfic";
+import TagsBar from "../tags/TagsBar";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -24,9 +25,6 @@ const useStyles = makeStyles((theme) => ({
     authorBar: {
         marginBottom: theme.spacing(2)
     },
-    tag: {
-        margin: theme.spacing(0.2)
-    }
 }));
 
 const AuthorBar = (props) => {
@@ -36,24 +34,6 @@ const AuthorBar = (props) => {
         <Box className={classes.authorBar} display="flex">
             <Avatar className={classes.avatar}>{props.author.substring(0,1).toUpperCase()}</Avatar>
             <Box>{props.author}</Box>
-        </Box>
-    )
-}
-
-const TagsBar = (props) => {
-    const classes = useStyles()
-    const { tags } = props
-
-    return(
-        <Box
-            alignContent="left"
-            textAlign="left"
-        >
-            {tags && tags.map((tag, i) => {
-                return(
-                    <Chip className={classes.tag} key={tag.name + i} label={tag.name}/>
-                )
-            })}
         </Box>
     )
 }

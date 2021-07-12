@@ -1,6 +1,6 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Navigation from './navigation/Navigation'
+import Navigation from './componets/navigation/Navigation'
 import React from "react";
 import {Switch, Route} from "react-router-dom";
 import Login from "./componets/Login";

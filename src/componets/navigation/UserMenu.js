@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {Menu, MenuItem, Select} from "@material-ui/core"
 import Button from "@material-ui/core/Button"
-import AuthService from '../service/auth.service'
+import AuthService from '../../service/auth.service'
 import Avatar from "@material-ui/core/Avatar"
 import {makeStyles} from "@material-ui/core/styles"
 import {deepOrange} from "@material-ui/core/colors"
@@ -11,8 +11,8 @@ const useStyles = makeStyles((theme) => ({
     avatar: {
         color: theme.palette.getContrastText(deepOrange[500]),
         backgroundColor: deepOrange[500],
-        height: 24,
-        width: 24,
+        height: 44,
+        width: 44,
         fontSize: 10,
         marginRight: theme.spacing(1)
     }
@@ -37,6 +37,18 @@ const UserMenu = ({logoutHandler}) => {
         history.push(to)
     };
 
+    const onClickHandler = ({handles, params}) => {
+        for (let i = 0; i < handles.length; i++) {
+            const args = params[i]
+            if (Boolean(args)) {
+                handles[i](...args)
+            } else {
+                handles[i]()
+            }
+        }
+        handleClose()
+    }
+
     return (
         <>
             <Button
@@ -55,8 +67,23 @@ const UserMenu = ({logoutHandler}) => {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
             >
-                <MenuItem onClick={() => handleRedirect('/profile')}>Profile</MenuItem>
-                <MenuItem onClick={logoutHandler}>Logout</MenuItem>
+                <MenuItem
+                    onClick={() => onClickHandler({
+                        handles: [handleRedirect],
+                        params: [['/profile']]
+                    })
+                    }
+                >
+                    Profile
+                </MenuItem>
+                <MenuItem onClick={() => onClickHandler({
+                        handles: [handleRedirect, logoutHandler],
+                        params: [['/'], null]
+                    })
+                }
+                >
+                    Logout
+                </MenuItem>
             </Menu>
         </>
     );
